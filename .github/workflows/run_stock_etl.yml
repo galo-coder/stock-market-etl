@@ -35,5 +35,4 @@ jobs:
         git config --global user.email "github-actions@github.com"
         git add images/top10_graph.png
         git commit -m "Update weekly chart" || echo "No changes to commit"
-        git remote set-url origin https://x-access-token:${TOKEN}@github.com/${REPO}.git
-        git push origin HEAD:main
+        git push "https://x-access-token:${TOKEN}@github.com/${REPO}.git" HEAD:main
