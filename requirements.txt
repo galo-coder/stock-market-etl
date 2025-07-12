@@ -2,13 +2,7 @@
 # The Python Worker is managed by the Azure Functions platform
 # Manually managing azure-functions-worker may cause unexpected issues
 
-azure-functions
 yfinance
 pandas
 matplotlib
-requests
 beautifulsoup4
-python-dotenv
-azure-identity
-azure-keyvault-secrets
-azure-storage-blob
