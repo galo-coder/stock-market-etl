@@ -32,5 +32,4 @@ jobs:
         git config --global user.email "github-actions@github.com"
         git add images/top10_graph.png
         git commit -m "Update weekly chart" || echo "No changes to commit"
-        git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
-
+        git push "https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:main
