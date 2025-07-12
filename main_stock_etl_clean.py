@@ -7,11 +7,11 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-# Crear carpeta para el gráfico
+# Create folder for the chart
 os.makedirs("images", exist_ok=True)
 
 # ─────────────────────────────────────────────
-# 1. EXTRAER TICKERS DINÁMICOS DESDE YAHOO
+# 1. EXTRACT DYNAMIC TICKERS FROM YAHOO
 # ─────────────────────────────────────────────
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
@@ -28,14 +28,14 @@ url = "https://es-us.finanzas.yahoo.com/mercados/acciones/m%C3%A1s-activas/?star
 tickers = get_top_tickers(url, 20)
 
 # ─────────────────────────────────────────────
-# 2. DESCARGAR PRECIOS CON YFINANCE
+# 2. DOWNLOAD PRICES WITH YFINANCE
 # ─────────────────────────────────────────────
 
 end_date = datetime.today().date()
 start_date = end_date - timedelta(days=365)
 start_date = start_date.strftime("%Y-%m-%d")
 end_date = end_date.strftime("%Y-%m-%d")
-print(f"[INFO] Extrayendo datos desde {start_date} hasta {end_date}")
+print(f"[INFO] Extracting data desde {start_date} hasta {end_date}")
 
 df = yf.download(
     tickers=tickers,
@@ -62,7 +62,7 @@ close_long_df = close_df.reset_index().melt(
 close_long_df["Ticker_code"] = close_long_df["Ticker_code"].str.replace("_close", "")
 
 # ─────────────────────────────────────────────
-# 3. OBTENER NOMBRES DE COMPAÑÍAS
+# 3. GET COMPANY NAMES
 # ─────────────────────────────────────────────
 
 def get_company_name_and_sector(ticker):
@@ -80,7 +80,7 @@ company_data = [get_company_name_and_sector(t) for t in tickers]
 dim_company = pd.DataFrame(company_data)
 
 # ─────────────────────────────────────────────
-# 4. TRANSFORMACIÓN Y VISUALIZACIÓN
+# 4. TRANSFORMATION AND VISUALIZATION
 # ─────────────────────────────────────────────
 
 fact = close_long_df
@@ -126,9 +126,9 @@ for ticker in result["Ticker_code"].unique():
     )
 
 plt.legend()
-plt.title(f"Top 10 acciones más valiosas (hasta la semana {latest_week})")
-plt.xlabel("Semana")
-plt.ylabel("Precio promedio de cierre ($)")
+plt.title(f"Top 10 most valuable stocks (up to week {latest_week})")
+plt.xlabel("Week")
+plt.ylabel("Average closing price ($)")
 plt.xticks(rotation=45)
 plt.grid(True)
 plt.tight_layout()

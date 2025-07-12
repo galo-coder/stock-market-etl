@@ -36,3 +36,4 @@ jobs:
         git add images/top10_graph.png
         git commit -m "Update weekly chart" || echo "No changes to commit"
         git push "https://x-access-token:${TOKEN}@github.com/${REPO}.git" HEAD:main
+
